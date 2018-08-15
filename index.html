@@ -24,20 +24,23 @@
             <thead>
                 <tr>
                     <th colspan="2">
-                        <span id="gameTitle">90's Movies Hangman</span>
-                        <!-- <img id="youwin-image" src="assets/images/youwin.png" alt="Winning Image" />
-                        <img id="gameover-image" src="assets/images/gameover.png" alt="Game Over Image" /> -->
-                        <h1 id="tryAgain">Press Any Key to Try Again!</h1>
+
+
+                        <h1 id="instructions">Whats that 90's movie?!</h1>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="clue"></td>
                     <td>
-                        <h2>
-                            <div>Press any Key start!</div>
-                        </h2>
+                        <div id="hintTitle">Heres a hint!</div>
+                        <br>
+                        <div id="hint"></div>
+                    </td>
+                    <td>
+                        <!-- <h2>
+                            <div>Enter Letters to complete the puzzle!</div>
+                        </h2> -->
                         <h2>Wins:</h2>
                         <div id="gameWins"></div>
                         <h2>Current Word:</h2>
@@ -47,7 +50,7 @@
                         <h2>Guesses Left:</h2>
                         <div id="remainingGuesses"></div>
                         <h2>All Guesses:</h2>
-                        <div id="userGuesses"></div>
+                        <div id="usersGuess"></div>
                     </td>
                 </tr>
             </tbody>
@@ -57,6 +60,11 @@
         <div class="container">
         </div>
     </footer>
+
+    <script>
+        wordGuessGame();
+        updateGuess();
+    </script>
 
 </body>
 
