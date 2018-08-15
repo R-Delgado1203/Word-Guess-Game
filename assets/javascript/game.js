@@ -62,6 +62,9 @@ function wordGuessGame() {
         selectedWord.push("_");       
     }
 
+    //remove text from footer when starting a new game
+    document.getElementById("resultsText").textContent ="";
+    document.getElementById("tryAgain").textContent ="";
 
     //refresh the screen
     updateGuess();
@@ -109,14 +112,18 @@ function isUserCorrect(letter) {
 //check if all letters have been entered.
 function isWinner() {
     if (selectedWord.indexOf("_") === -1) {
+        document.getElementById("resultsText").textContent ="YOU WIN!";
+        document.getElementById("tryAgain").textContent ="Press Any Key to Start Again!";
         wins++;
-        gameOver = true;
+        gameOver = true;        
     }
 };
 
 //check if the user is out of guesses
 function isLoser() {
     if (remainingGuesses <= 0) {
+        document.getElementById("resultsText").textContent ="WOMP WOMP LOOOOOOSER!";
+        document.getElementById("tryAgain").textContent ="Press Any Key to Start Again!";
         losses++;
         gameOver = true;
     }
@@ -149,6 +156,7 @@ document.onkeydown = function (event) {
         }
     }
 };
+
 
 
 
