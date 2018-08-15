@@ -65,7 +65,7 @@ function wordGuessGame() {
     //remove text from footer when starting a new game
     document.getElementById("resultsText").textContent ="";
     document.getElementById("tryAgain").textContent ="";
-
+    document.getElementById("usersGuessHead").textContent ="";
     //refresh the screen
     updateGuess();
 };
@@ -87,7 +87,7 @@ function updateGuess() {
     document.getElementById("usersGuess").innerText = usersGuess;
 };
 
-//compare letters entered to the character you're trying to guess
+//compare letters entered to the movie you're trying to guess
 function isUserCorrect(letter) {
     var positions = [];
 
@@ -131,6 +131,7 @@ function isLoser() {
 
 //guessing
 function makeGuess(letter) {
+    document.getElementById("usersGuessHead").textContent ="Letters Guessed:";
     if (remainingGuesses > 0) {
 
         if (usersGuess.indexOf(letter) === -1) {
