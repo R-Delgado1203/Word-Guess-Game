@@ -1,13 +1,13 @@
 
 
 var totalGuesses = 10;      // number of tries
-var usersGuess = [];        // letters the user guessed
-var randomMovie;            // randomly generated array index
-var selectedWord = [];       // This will be the word we actually build to match the current word
-var remainingGuesses = 0;   // How many tries the player has left
-var gameOver = false;       // Flag for 'press any key to try again'     
-var wins = 0;               //wins
-var losses = 0;
+var usersGuess = [];        // user letters guessed
+var randomMovie;            // num generater to grab index for movie array
+var selectedWord = [];      // array of randomly selected word in "_" format
+var remainingGuesses = 0;   // remainaing guesses
+var gameOver = false;       // is game over?     
+var wins = 0;               // wins
+var losses = 0;             // losses
 var movies = ["PULP FICTION", "TITANIC", "GOODFELLAS", "JURASSIC PARK", "THE SILENCE OF THE LAMBS", "THE MATRIX", "FIGHT CLUB", "SEVEN", "FORREST GUMP", "HOME ALONE"];
 
 
@@ -59,19 +59,24 @@ function wordGuessGame() {
 
     //build the word with blanks
     for (var i = 0; i < movies[randomMovie].length; i++) {
-        selectedWord.push("_");       
+        if (movies[randomMovie][i] === " ") {
+            selectedWord.push(" ");
+        }
+        else {
+            selectedWord.push("_");
+        }
     }
 
     //remove text from footer when starting a new game
-    document.getElementById("resultsText").textContent ="";
-    document.getElementById("tryAgain").textContent ="";
-    document.getElementById("usersGuessHead").textContent ="";
+    document.getElementById("resultsText").textContent = "";
+    document.getElementById("tryAgain").textContent = "";
+    document.getElementById("usersGuessHead").textContent = "";
     //refresh the screen
-    updateGuess();
+    updateUI();
 };
 
-//  Updates the display on the HTML Page
-function updateGuess() {
+//  update browser
+function updateUI() {
 
     document.getElementById("gameWins").innerText = wins;
     document.getElementById("gameLosses").innerText = losses;
@@ -98,7 +103,6 @@ function isUserCorrect(letter) {
     }
 
 
-
     if (positions.length <= 0) {
         remainingGuesses--;
     }
@@ -112,28 +116,33 @@ function isUserCorrect(letter) {
 //check if all letters have been entered.
 function isWinner() {
     if (selectedWord.indexOf("_") === -1) {
-        document.getElementById("resultsText").textContent ="YOU WIN!";
-        document.getElementById("tryAgain").textContent ="Press Any Key to Start Again!";
+        gameOver = true;
         wins++;
-        gameOver = true;        
+        updateUI();
+        document.getElementById("resultsText").textContent = "YOU WIN!";
+        document.getElementById("tryAgain").textContent = "Press the ENTER Key to Start Again!";
+
+
     }
 };
 
 //check if the user is out of guesses
 function isLoser() {
     if (remainingGuesses <= 0) {
-        document.getElementById("resultsText").textContent ="WOMP WOMP LOOOOOOSER!";
-        document.getElementById("tryAgain").textContent ="Press Any Key to Start Again!";
-        losses++;
         gameOver = true;
+        losses++;
+        updateUI();
+        document.getElementById("resultsText").textContent = "WOMP WOMP LOOOOOOSER!";
+        document.getElementById("tryAgain").textContent = "Press the ENTER key to Start Again!";
+
+
     }
 };
 
 //guessing
 function makeGuess(letter) {
-    document.getElementById("usersGuessHead").textContent ="Letters Guessed:";
+    document.getElementById("usersGuessHead").textContent = "Letters Guessed:";
     if (remainingGuesses > 0) {
-
         if (usersGuess.indexOf(letter) === -1) {
             usersGuess.push(letter);
             isUserCorrect(letter);
@@ -143,19 +152,20 @@ function makeGuess(letter) {
 
 // Event listener
 document.onkeydown = function (event) {
-    //if the game is finished, restart it.
-    if (gameOver) {
-        wordGuessGame();
-        gameOver = false;
-    } else {
-        // Check to make sure a-z was pressed.
-        if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode === 32) {
+
+    
+        if (gameOver && event.keyCode === 13) {
+            wordGuessGame();
+            gameOver = false;
+        }
+  
+        if (gameOver === false && event.keyCode >= 65 && event.keyCode <= 90) {
             makeGuess(event.key.toUpperCase());
-            updateGuess();
+            updateUI();
             isWinner();
             isLoser();
         }
-    }
+    
 };
 
 

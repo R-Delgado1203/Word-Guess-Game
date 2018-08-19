@@ -38,19 +38,17 @@
                         <div id="hint"></div>
                     </td>
                     <td>
-                        <!-- <h2>
-                            <div>Enter Letters to complete the puzzle!</div>
-                        </h2> -->
-                        <h2>Wins:</h2>
-                        <div id="gameWins"></div>
                         <h2>Current Word:</h2>
                         <div id="currentWord"></div>
-                        <h2>Losses:</h2>
-                        <div id="gameLosses"></div>
-                        <h2>Guesses Left:</h2>
-                        <div id="remainingGuesses"></div>
+                        <br>
                         <h2 id="usersGuessHead"></h2>
                         <div id="usersGuess"></div>
+                        <br>
+                        <h2>Guesses Left: <span id="remainingGuesses"></span></h2>                        
+                        <br>
+                        <h2 id="gameWinHead">Wins: <span id="gameWins"></span></h2>                        
+                        <h2 id="gameLossHead">Losses: <span id="gameLosses"></span></h2>
+                        
                     </td>
                 </tr>
             </tbody>
@@ -65,7 +63,6 @@
 
     <script>
         wordGuessGame();
-        updateGuess();
     </script>
 
 </body>
